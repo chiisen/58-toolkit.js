@@ -1,0 +1,15 @@
+{
+  "name": "58-toolkit",
+  "version": "1.0.0",
+  "description": "常用工具箱",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-chiisen:chiisen/58-toolkit.js.git"
+  },
+  "author": "Sam",
+  "license": "MIT"
+}
