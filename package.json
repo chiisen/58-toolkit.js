@@ -11,5 +11,10 @@
     "url": "git@github.com-chiisen:chiisen/58-toolkit.js.git"
   },
   "author": "Sam",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cli-color": "^2.0.3",
+    "dotenv": "^16.0.3",
+    "node-xlsx": "^0.21.0"
+  }
 }
