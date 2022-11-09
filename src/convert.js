@@ -1,3 +1,6 @@
+const { isNumber } = require("./helpers")
+const { denomIndexToDenomString } = require("./data")
+
 /**
  * EXCEL 轉成 denom 陣列
  *
@@ -93,9 +96,39 @@ function convertListToDenomString(denomArray) {
   return denomIndexString_
 }
 
+/**
+ * 陣列轉成轉換過的 denom 字串
+ * @param denomArray
+ * @returns
+ */
+function convertListToDenomConvertString(denomArray) {
+  if (!denomArray) {
+    console.log(clc.red(`Null denomArray`))
+    return null
+  }
+  let denomIndexString_ = ""
+  denomArray.forEach((r) => {
+    if (r) {
+      if (isNumber(r)) {
+        const denomString_ = denomIndexToDenomString(r)
+        if (denomIndexString_ === "") {
+          denomIndexString_ += denomString_
+        } else {
+          denomIndexString_ += "," + denomString_
+        }
+      } else {
+        console.log(clc.red(`r(${r}) not number.`))
+        return null
+      }
+    }
+  })
+  return denomIndexString_
+}
+
 module.exports = {
   convertExcelToDenomList,
   convertExcelToExcelDenomList,
   convertExcelToDenomString,
   convertListToDenomString,
+  convertListToDenomConvertString,
 }
