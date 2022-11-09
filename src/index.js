@@ -16,6 +16,9 @@ console.log("ENV: " + process.env["ENV"]) //ENV
 module.exports = {
   data: require("./data"),
   excel: require("./excel"),
+  file: require("./file"),
+  convert: require("./convert"),
+  helpers: require("./helpers"),
 }
 
 console.log("58-toolkit 程式結束!")
