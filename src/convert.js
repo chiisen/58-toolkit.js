@@ -9,7 +9,7 @@ const { denomIndexToDenomString } = require("./data")
  */
 function convertExcelToDenomList(excelDenomArray) {
   if (!excelDenomArray) {
-    console.log(clc.red(`Null excelDenomArray`))
+    console.error(`Null excelDenomArray`)
     return null
   }
   const denomList_ = []
@@ -31,7 +31,7 @@ function convertExcelToDenomList(excelDenomArray) {
  */
 function convertExcelToExcelDenomList(excelDenomArray) {
   if (!excelDenomArray) {
-    console.log(clc.red(`Null excelDenomArray`))
+    console.error(`Null excelDenomArray`)
     return null
   }
   const denomList_ = []
@@ -55,7 +55,7 @@ function convertExcelToExcelDenomList(excelDenomArray) {
  */
 function convertExcelToDenomString(denomArray) {
   if (!denomArray) {
-    console.log(clc.red(`Null denomArray`))
+    console.error(`Null denomArray`)
     return null
   }
   let denomIdx_ = 29
@@ -80,7 +80,7 @@ function convertExcelToDenomString(denomArray) {
  */
 function convertListToDenomString(denomArray) {
   if (!denomArray) {
-    console.log(clc.red(`Null denomArray`))
+    console.error(`Null denomArray`)
     return null
   }
   let denomIndexString_ = ""
@@ -103,7 +103,7 @@ function convertListToDenomString(denomArray) {
  */
 function convertListToDenomConvertString(denomArray) {
   if (!denomArray) {
-    console.log(clc.red(`Null denomArray`))
+    console.error(`Null denomArray`)
     return null
   }
   let denomIndexString_ = ""
@@ -133,7 +133,7 @@ function convertListToDenomConvertString(denomArray) {
  */
 function convertExcelToDenomConvertString(denomArray) {
   if (!denomArray) {
-    console.log(clc.red(`Null denomArray`))
+    console.error(`Null denomArray`)
     return null
   }
   let denomIndex_ = 29
