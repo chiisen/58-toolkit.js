@@ -125,10 +125,43 @@ function convertListToDenomConvertString(denomArray) {
   return denomIndexString_
 }
 
+/**
+ * EXCEL 轉成轉換過的 denom 字串
+ *
+ * @param denomArray 要EXCEL的資料才行
+ * @returns
+ */
+function convertExcelToDenomConvertString(denomArray) {
+  if (!denomArray) {
+    console.log(clc.red(`Null denomArray`))
+    return null
+  }
+  let denomIndex_ = 29
+  let denomIndexString_ = ""
+  denomArray.forEach((r) => {
+    if (r) {
+      if (isNumber(r)) {
+        const denomString_ = denomIndexToDenomString(r)
+        if (denomIndexString_ === "") {
+          denomIndexString_ += denomString_
+        } else {
+          denomIndexString_ += "," + denomString_
+        }
+      } else {
+        console.log(clc.red(`r(${r}) not number.`))
+        return null
+      }
+    }
+    denomIndex_--
+  })
+  return denomIndexString_
+}
+
 module.exports = {
   convertExcelToDenomList,
   convertExcelToExcelDenomList,
   convertExcelToDenomString,
   convertListToDenomString,
   convertListToDenomConvertString,
+  convertExcelToDenomConvertString,
 }
