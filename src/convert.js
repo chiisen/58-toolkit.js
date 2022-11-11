@@ -2,10 +2,11 @@ const { isNumber } = require("./helpers")
 const { denomIndexToDenomString } = require("./data")
 
 /**
- * EXCEL 轉成 denom 陣列
+ * EXCEL 格式的陣列轉成 denom 索引陣列
+ * PS.計算欄位轉為 denom 索引，所以輸入為 denom 索引或 denom 都可以
  *
  * @param excelDenomArray 要EXCEL的資料才行
- * @returns
+ * @returns denom 索引陣列
  */
 function convertExcelToDenomList(excelDenomArray) {
   if (!excelDenomArray) {
@@ -24,10 +25,11 @@ function convertExcelToDenomList(excelDenomArray) {
 }
 
 /**
- * EXCEL 轉成 EXCEL 格式的 denom 陣列
+ * EXCEL 格式的陣列轉成 EXCEL 格式的 denom 陣列
+ * PS.計算欄位轉為 denom 索引，所以輸入為 denom 索引或 denom 都可以
  *
  * @param excelDenomArray 要EXCEL的資料才行
- * @returns
+ * @returns EXCEL 格式的 denom 陣列
  */
 function convertExcelToExcelDenomList(excelDenomArray) {
   if (!excelDenomArray) {
@@ -38,7 +40,7 @@ function convertExcelToExcelDenomList(excelDenomArray) {
   let denomIdx_ = 29
   excelDenomArray.forEach((r) => {
     if (r) {
-      denomList_.push(denomIdx_)
+      denomList_.push(denomIdx_) //@note 確認輸入是數值還是字串
     } else {
       denomList_.push("")
     }
@@ -48,19 +50,20 @@ function convertExcelToExcelDenomList(excelDenomArray) {
 }
 
 /**
- * EXCEL 轉成 denom 字串
+ * EXCEL 格式的陣列轉成 denom 索引字串
+ * PS.計算欄位轉為 denom 索引，所以輸入為 denom 索引或 denom 都可以
  *
- * @param denomArray 要EXCEL的資料才行
- * @returns
+ * @param excelDenomArray EXCEL 格式的陣列
+ * @returns denom 索引字串
  */
-function convertExcelToDenomString(denomArray) {
-  if (!denomArray) {
-    console.error(`Null denomArray`)
+function convertExcelToDenomString(excelDenomArray) {
+  if (!excelDenomArray) {
+    console.error(`Null excelDenomArray`)
     return null
   }
   let denomIdx_ = 29
   let denomIndexString_ = ""
-  denomArray.forEach((r) => {
+  excelDenomArray.forEach((r) => {
     if (r) {
       if (denomIndexString_ === "") {
         denomIndexString_ += denomIdx_.toString()
@@ -74,9 +77,10 @@ function convertExcelToDenomString(denomArray) {
 }
 
 /**
- * 陣列轉成 denom 字串
- * @param denomArray
- * @returns
+ * denom 陣列(可以是 denom 或 denom 索引)轉成 denom 字串
+ *
+ * @param denomArray 可以是 denom 或 denom 索引的陣列
+ * @returns denom 字串(denom 或 denom 索引)
  */
 function convertListToDenomString(denomArray) {
   if (!denomArray) {
@@ -97,27 +101,28 @@ function convertListToDenomString(denomArray) {
 }
 
 /**
- * 陣列轉成轉換過的 denom 字串
- * @param denomArray
- * @returns
+ * denom 【索引】陣列轉成轉換過的 denom 字串
+ *
+ * @param denomIndexArray denom 索引陣列
+ * @returns 轉換過的 denom 字串(例如: '1:1')
  */
-function convertListToDenomConvertString(denomArray) {
-  if (!denomArray) {
-    console.error(`Null denomArray`)
+function convertListToDenomConvertString(denomIndexArray) {
+  if (!denomIndexArray) {
+    console.error(`Null denomIndexArray`)
     return null
   }
   let denomIndexString_ = ""
-  denomArray.forEach((r) => {
+  denomIndexArray.forEach((r) => {
     if (r) {
       if (isNumber(r)) {
         const denomString_ = denomIndexToDenomString(r)
         if (denomIndexString_ === "") {
-          denomIndexString_ += denomString_
+          denomIndexString_ += `'${denomString_}'`
         } else {
-          denomIndexString_ += "," + denomString_
+          denomIndexString_ += `,'${denomString_}'`
         }
       } else {
-        console.log(clc.red(`r(${r}) not number.`))
+        console.error(`r(${r}) not number.`)
         return null
       }
     }
@@ -126,33 +131,31 @@ function convertListToDenomConvertString(denomArray) {
 }
 
 /**
- * EXCEL 轉成轉換過的 denom 字串
+ * EXCEL 格式的 denom 【索引】轉成轉換過的 denom 字串
  *
- * @param denomArray 要EXCEL的資料才行
- * @returns
+ * @param excelDenomIndexArray 要EXCEL的資料才行
+ * @returns 轉換過的 denom 字串(例如: '1:1')
  */
-function convertExcelToDenomConvertString(denomArray) {
-  if (!denomArray) {
-    console.error(`Null denomArray`)
+function convertExcelToDenomConvertString(excelDenomIndexArray) {
+  if (!excelDenomIndexArray) {
+    console.error(`Null excelDenomIndexArray`)
     return null
   }
-  let denomIndex_ = 29
   let denomIndexString_ = ""
-  denomArray.forEach((r) => {
+  excelDenomIndexArray.forEach((r) => {
     if (r) {
       if (isNumber(r)) {
         const denomString_ = denomIndexToDenomString(r)
         if (denomIndexString_ === "") {
-          denomIndexString_ += denomString_
+          denomIndexString_ += `'${denomString_}'`
         } else {
-          denomIndexString_ += "," + denomString_
+          denomIndexString_ += `,'${denomString_}'`
         }
       } else {
-        console.log(clc.red(`r(${r}) not number.`))
+        console.error(`r(${r}) not number.`)
         return null
       }
     }
-    denomIndex_--
   })
   return denomIndexString_
 }
