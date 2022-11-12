@@ -11,6 +11,11 @@ npm install --save D:\github\本地專案的路徑\58-toolkit.js
 npm uninstall --save 58-toolkit
 ```
 
+# 安裝 58-toolkit 套件
+```bash=
+npm install 58-toolkit
+```
+
 # 引用 58-toolkit 套件
 ```javascript=
 const { data, excel, convert } = require("58-toolkit")
