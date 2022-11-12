@@ -1,4 +1,3 @@
-const clc = require("cli-color")
 const xlsx = require("node-xlsx") // 引入 node-xlsx 模組
 const fs = require("fs")
 
@@ -10,7 +9,7 @@ const { isNumber } = require("./helpers")
  * @param {string} fileName
  */
 function getExcel(fileName, isLog = false, sheetIndex = 0) {
-  console.log(clc.cyan(`"${fileName}-${sheetIndex}" excel-parse start`))
+  console.log(`"${fileName}-${sheetIndex}" excel-parse start`)
 
   const excel = []
   const sheets = xlsx.parse(fileName)
@@ -31,7 +30,7 @@ function getExcel(fileName, isLog = false, sheetIndex = 0) {
     }
   })
 
-  console.log(clc.cyan(`"${fileName}-${sheetIndex}" excel-parse end`))
+  console.log(`"${fileName}-${sheetIndex}" excel-parse end`)
   return excel
 }
 
@@ -60,7 +59,7 @@ function writeSinglePageExcel(fileName, sheetName, dataArray, flag = "w") {
       break
   }
 
-  console.log(clc.cyan(`${fileName} 寫入成功!`))
+  console.log(`${fileName} 寫入成功!`)
 }
 
 /**
@@ -83,7 +82,7 @@ function writeMultiplePagesExcel(fileName, buff, flag = "w") {
       break
   }
 
-  console.log(clc.cyan(`${fileName} 寫入成功!`))
+  console.log(`${fileName} 寫入成功!`)
 }
 
 module.exports = { getExcel, writeSinglePageExcel, writeMultiplePagesExcel }

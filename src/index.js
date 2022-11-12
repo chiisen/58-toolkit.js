@@ -5,7 +5,7 @@ const fs = require("fs")
 
 const envFile = ".env"
 if (!fs.existsSync(".env")) {
-  console.error(clc.red(`\n 讀檔失敗，找不到 ${envFile}`))
+  console.error(`\n 讀檔失敗，找不到 ${envFile}`)
   //process.exit(1)
 }
 
