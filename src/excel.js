@@ -22,13 +22,17 @@ function getExcel(fileName, isLog = false, sheetIndex = 0) {
   }
 
   // 輸出每行內容
-  sheet.data.forEach((row) => {
-    // 陣列格式, 根據不同的索引取數據
-    excel.push(row)
-    if (isLog) {
-      console.log(row)
-    }
-  })
+  if (!sheet) {
+    console.error(`找不到 sheetName: ${sheetIndexString}`)
+  } else {
+    sheet.data.forEach((row) => {
+      // 陣列格式, 根據不同的索引取數據
+      excel.push(row)
+      if (isLog) {
+        console.log(row)
+      }
+    })
+  }
 
   console.log(`"${fileName}-${sheetIndex}" excel-parse end`)
   return excel
