@@ -3,7 +3,7 @@
 
 # 其他專案如果要安裝本地的 58-toolkit 套件
 ```bash=
-npm install --save D:\github\本地專案的路徑\58-toolkit.js
+npm install --save D:\本地專案的路徑\58-toolkit.js
 ```
 
 # 移除本地安裝包的 58-toolkit 套件

@@ -146,4 +146,29 @@ function denomRatioToDenomString(denom) {
   throw msg_
 }
 
-module.exports = { denomStringToDenomIndex, denomIndexToDenomString, denomStringToDenomRatio, denomRatioToDenomString }
+/**
+ * 所有 minBet 1~88 的陣列
+ */
+const minBetList = [1, 3, 5, 9, 10, 15, 20, 25, 30, 40, 50, 88]
+
+/**
+ * 所有 betLevel 的陣列
+ */
+const betLevelList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+/**
+ * 所有 denom 索引的陣列 1~29
+ */
+const denomIndexList = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+]
+
+module.exports = {
+  denomStringToDenomIndex,
+  denomIndexToDenomString,
+  denomStringToDenomRatio,
+  denomRatioToDenomString,
+  minBetList,
+  betLevelList,
+  denomIndexList,
+}
