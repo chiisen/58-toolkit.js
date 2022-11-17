@@ -64,7 +64,8 @@ const denomIndexToDenomStringArrayMap = swapMap(denomStringToDenomIndexMap)
 function denomIndexToDenomString(denom) {
   if (isNumber(denom)) {
     //@note 使用 swapMap 轉換後，都會變成陣列，目前還沒辦法調整為字串，之後會再調整
-    const denomString_ = denomIndexToDenomStringArrayMap.get(denom)
+    const denomIndex_ = parseInt(denom)
+    const denomString_ = denomIndexToDenomStringArrayMap.get(denomIndex_)
     if (denomString_) {
       return denomString_[0]
     }
