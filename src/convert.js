@@ -77,6 +77,40 @@ function convertExcelToDenomString(excelDenomArray) {
 }
 
 /**
+ * denom 陣列純字串轉為 Excel 格式的 denom 陣列
+ * @param {*} denomListString
+ * @returns
+ */
+function convertDenomListStringToExcelDenomList(denomListString) {
+  if (!denomListString) {
+    console.error(`Null denomListString`)
+    return null
+  }
+
+  if (!isNumber(denomListString)) {
+    const denomIndexList_ = denomListString.split(",")
+
+    const excelDenomList_ = []
+    for (i = 29; i >= 1; i--) {
+      if (denomIndexList_.includes(i)) {
+        excelDenomList_.push(`${i}`)
+      } else {
+        excelDenomList_.push(``)
+      }
+    }
+  } else {
+    for (i = 29; i >= 1; i--) {
+      if (denomIndexList_ === i) {
+        excelDenomList_.push(`${i}`)
+      } else {
+        excelDenomList_.push(``)
+      }
+    }
+  }
+  return excelDenomList_
+}
+
+/**
  * denom 陣列(可以是 denom 或 denom 索引)轉成 denom 字串
  *
  * @param denomArray 可以是 denom 或 denom 索引的陣列
@@ -167,4 +201,5 @@ module.exports = {
   convertListToDenomString,
   convertListToDenomConvertString,
   convertExcelToDenomConvertString,
+  convertDenomListStringToExcelDenomList,
 }
