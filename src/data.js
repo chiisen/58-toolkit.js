@@ -162,14 +162,21 @@ function denomIndexListStringToDenomListString(denomListString) {
     console.error(msg_)
     throw msg_
   }
-  const denomIndexList_ = denomListString.split(",")
 
-  let denomListString_ = ""
-  denomIndexList_.forEach((denomIndex) => {
-    const denomString_ = denomIndexToDenomString(denomIndex)
-    denomListString_ += `[${denomString_}] `
-  })
-  return denomListString_
+  if (!isNumber(denomListString)) {
+    const denomIndexList_ = denomListString.split(",")
+
+    let denomListString_ = ""
+    denomIndexList_.forEach((denomIndex) => {
+      const denomString_ = denomIndexToDenomString(denomIndex)
+      denomListString_ += `[${denomString_}] `
+    })
+    return denomListString_
+  } else {
+    const denomIndex_ = parseInt(denomListString)
+    const denomString_ = denomIndexToDenomString(denomIndex_)
+    return denomString_
+  }
 }
 
 /**
