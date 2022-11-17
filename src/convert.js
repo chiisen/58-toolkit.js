@@ -87,10 +87,11 @@ function convertDenomListStringToExcelDenomList(denomListString) {
     return null
   }
 
+  const excelDenomList_ = []
+
   if (!isNumber(denomListString)) {
     const denomIndexList_ = denomListString.split(",")
 
-    const excelDenomList_ = []
     for (i = 29; i >= 1; i--) {
       if (denomIndexList_.includes(i)) {
         excelDenomList_.push(`${i}`)
@@ -100,7 +101,7 @@ function convertDenomListStringToExcelDenomList(denomListString) {
     }
   } else {
     for (i = 29; i >= 1; i--) {
-      if (denomIndexList_ === i) {
+      if (denomListString === i) {
         excelDenomList_.push(`${i}`)
       } else {
         excelDenomList_.push(``)
