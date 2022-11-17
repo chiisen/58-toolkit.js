@@ -157,6 +157,11 @@ function denomRatioToDenomString(denom) {
  * PS.[29,28,27] => ['1:100000','1:50000','1:10000']
  */
 function denomIndexListStringToDenomListString(denomListString) {
+  if (!denomListString) {
+    const msg_ = `Null denomListString: '${denomListString}'`
+    console.error(msg_)
+    throw msg_
+  }
   const denomIndexList_ = denomListString.split(",")
 
   let denomListString_ = ""
