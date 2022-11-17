@@ -180,6 +180,29 @@ function denomIndexListStringToDenomListString(denomListString) {
 }
 
 /**
+ * 面額【索引】陣列字串取得【預設】的面額【字串】
+ * PS.[29,28,27] => ['1:100000']
+ */
+function denomIndexListStringToDefaultDenomString(denomListString) {
+  if (!denomListString) {
+    const msg_ = `Null denomListString: '${denomListString}'`
+    console.error(msg_)
+    throw msg_
+  }
+
+  if (!isNumber(denomListString)) {
+    const denomIndexList_ = denomListString.split(",")
+
+    let denomListString_ = denomIndexList_[0]
+    return denomListString_
+  } else {
+    const denomIndex_ = parseInt(denomListString)
+    const denomString_ = denomIndexToDenomString(denomIndex_)
+    return denomString_
+  }
+}
+
+/**
  * 所有 minBet 1~88 的陣列
  */
 const minBetList = [1, 3, 5, 9, 10, 15, 20, 25, 30, 40, 50, 88]
@@ -205,4 +228,5 @@ module.exports = {
   betLevelList,
   denomIndexList,
   denomIndexListStringToDenomListString,
+  denomIndexListStringToDefaultDenomString,
 }
