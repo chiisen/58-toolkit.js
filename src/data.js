@@ -65,7 +65,12 @@ function denomIndexToDenomString(denom) {
   if (isNumber(denom)) {
     //@note 使用 swapMap 轉換後，都會變成陣列，目前還沒辦法調整為字串，之後會再調整
     const denomString_ = denomIndexToDenomStringArrayMap.get(denom)
-    return denomString_[0]
+    if (denomString_) {
+      return denomString_[0]
+    }
+    const msg_ = `denom: '${denom}' not fond`
+    console.error(msg_)
+    throw msg_
   }
   const msg_ = `denom: '${denom}' not number`
   console.error(msg_)
