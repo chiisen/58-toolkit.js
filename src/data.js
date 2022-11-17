@@ -152,6 +152,21 @@ function denomRatioToDenomString(denom) {
 }
 
 /**
+ * 面額【索引】陣列字串轉成面額【字串】陣列字串
+ * PS.[29,28,27] => ['1:100000','1:50000','1:10000']
+ */
+function denomIndexListStringToDenomListString(denomListString) {
+  const denomIndexList_ = denomListString.split(",")
+
+  let denomListString_ = ""
+  denomIndexList_.forEach((denomIndex) => {
+    const denomString_ = denomIndexToDenomString(denomIndex)
+    denomListString_ += `[${denomString_}] `
+  })
+  return denomListString_
+}
+
+/**
  * 所有 minBet 1~88 的陣列
  */
 const minBetList = [1, 3, 5, 9, 10, 15, 20, 25, 30, 40, 50, 88]
@@ -176,4 +191,5 @@ module.exports = {
   minBetList,
   betLevelList,
   denomIndexList,
+  denomIndexListStringToDenomListString,
 }
