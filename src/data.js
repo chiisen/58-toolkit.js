@@ -204,6 +204,29 @@ function denomIndexListStringToDefaultDenomString(denomListString) {
 }
 
 /**
+ * 比對排序後的兩個陣列是否一致
+ */
+function mergeSortArray(sourceList, targetList){
+  let isSame_ = true
+  const sortSourceList_ = sourceList.sort(function (a, b) {
+    return a - b
+  }) //排序: 小到大
+
+  const sortTargetList = targetList.sort(function (a, b) {
+    return a - b
+  }) //排序: 小到大
+
+  for (i = 0; i < sortSourceList_.length; i++) {
+    if (isSame_) {
+      if (sortSourceList_[i] != sortTargetList[i]) {
+        isSame_ = false
+      }
+    }
+  }
+  return isSame_
+}
+
+/**
  * 所有 minBet 1~88 的陣列
  */
 const minBetList = [1, 3, 5, 9, 10, 15, 20, 25, 30, 40, 50, 88]
@@ -230,4 +253,5 @@ module.exports = {
   denomIndexList,
   denomIndexListStringToDenomListString,
   denomIndexListStringToDefaultDenomString,
+  mergeSortArray,
 }
