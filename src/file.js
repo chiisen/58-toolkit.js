@@ -35,7 +35,8 @@ function appendAlter(subPath, insertText, fileName) {
  * @param {string} fileName
  */
 function checkPathAndMkdir(fileName) {
-  const onlyPath = path.dirname(fileName)
+  const fileNameFix_ = fileName.replace("\\", "/")
+  const onlyPath = path.dirname(fileNameFix_)
   const filePathList_ = onlyPath.split("/")
   let existsPath_ = ""
   filePathList_.forEach((p) => {
@@ -46,4 +47,29 @@ function checkPathAndMkdir(fileName) {
   })
 }
 
-module.exports = { writeAlter, appendAlter, checkPathAndMkdir }
+/**
+ * 刪除目錄內的所有檔案
+ *
+ * @param {*} dirPath
+ */
+function emptyDir(dirPath) {
+  const dirContents = fs.readdirSync(dirPath) // List dir content
+
+  for (const fileOrDirPath of dirContents) {
+    try {
+      // Get Full path
+      const fullPath = path.join(dirPath, fileOrDirPath)
+      const stat = fs.statSync(fullPath)
+      if (stat.isDirectory()) {
+        // It's a sub directory
+        if (fs.readdirSync(fullPath).length) emptyDir(fullPath)
+        // If the dir is not empty then remove it's contents too(recursively)
+        fs.rmdirSync(fullPath)
+      } else fs.unlinkSync(fullPath) // It's a file
+    } catch (ex) {
+      console.error(ex.message)
+    }
+  }
+}
+
+module.exports = { writeAlter, appendAlter, checkPathAndMkdir, emptyDir }
