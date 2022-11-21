@@ -193,8 +193,9 @@ function denomIndexListStringToDefaultDenomString(denomListString) {
   if (!isNumber(denomListString)) {
     const denomIndexList_ = denomListString.split(",")
 
-    let denomListString_ = denomIndexList_[0]
-    return denomListString_
+    let denomIndex_ = denomIndexList_[0]
+    const denomString_ = denomIndexToDenomString(denomIndex_)
+    return denomString_
   } else {
     const denomIndex_ = parseInt(denomListString)
     const denomString_ = denomIndexToDenomString(denomIndex_)

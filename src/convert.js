@@ -93,8 +93,9 @@ function convertDenomListStringToExcelDenomList(denomListString) {
     const denomIndexList_ = denomListString.split(",")
 
     for (i = 29; i >= 1; i--) {
-      if (denomIndexList_.includes(i)) {
-        excelDenomList_.push(`${i}`)
+      if (denomIndexList_.includes(`${i}`)) {
+        const denomString_ = denomIndexToDenomString(i)
+        excelDenomList_.push(`${denomString_}`)
       } else {
         excelDenomList_.push(``)
       }
