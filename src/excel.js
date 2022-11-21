@@ -1,5 +1,6 @@
 const xlsx = require("node-xlsx") // 引入 node-xlsx 模組
 const fs = require("fs")
+const exceljs = require("exceljs")
 
 const { isNumber } = require("./helpers")
 const { checkPathAndMkdir } = require("./file")
@@ -73,9 +74,7 @@ function writeSinglePageExcel(fileName, sheetName, dataArray, flag = "w") {
  * 寫入多頁 Excel 檔案
  *
  * @param {string} fileName
- * @param {string} sheetName
- * @param {object} dataArray -> 
-    const dataArray = [['name', 'age']]
+ * @param {object} buff
  */
 function writeMultiplePagesExcel(fileName, buff, flag = "w") {
   checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
@@ -94,4 +93,100 @@ function writeMultiplePagesExcel(fileName, buff, flag = "w") {
   console.log(`${fileName} 寫入成功!`)
 }
 
-module.exports = { getExcel, writeSinglePageExcel, writeMultiplePagesExcel }
+/**
+ * 寫入單頁 Excel 檔案
+ *
+ * @param {string} fileName
+ * @param {string} sheetName
+ * @param {object} thisColumns [{ name: "欄位1" }, { name: "欄位2" }, { name: "欄位3" }]
+ * @param {object} thisRows [
+      ["張三", "22", "0911123456"],
+      ["李四", "33", "0922123456"],
+    ]
+ */
+function writeSinglePageExcelJs(fileName, sheetName, thisColumns, thisRows) {
+  checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
+
+  const workbook = new exceljs.Workbook()
+  workbook.creator = "Sam" //設定建立者
+  workbook.lastModifiedBy = "58-toolkit" //上次修改人
+  workbook.created = new Date(2022, 11, 21) //建立時間
+  workbook.modified = new Date() //修改時間
+
+  const sheet = workbook.addWorksheet(sheetName, { properties: { tabColor: { argb: "FFC0000" } } })
+  sheet.addTable({
+    name: sheetName,
+    ref: "A1", // 從A1開始(先預設A1，之後再開放此功能)
+    headerRow: true, // 有沒有要放標頭那一行 也就是columns的那行資料，如果設為false就會那行直接無效
+    // 範例: 寫入標題
+    //columns: [{ name: "欄位1" }, { name: "欄位2" }, { name: "欄位3" }],
+    columns: thisColumns,
+    /*
+    // 範例: 寫入內容
+    rows: [
+      ["張三", "22", "0911123456"],
+      ["李四", "33", "0922123456"],
+    ],
+    */
+    rows: thisRows,
+  })
+
+  workbook.xlsx
+    .writeFile(fileName)
+    .then(() => {
+      console.log(`${fileName} 寫入成功!`)
+    })
+    .catch((err) => {
+      console.error("err", err)
+    })
+}
+
+/**
+ * 寫入多頁 Excel 檔案
+ *
+ * @param {string} fileName
+ * @param {object} excelJsData [{ sheetName: "工作列1", 
+ *                                columns: [{ name: "欄位1" }, { name: "欄位2" }, { name: "欄位3" }],
+ *                                rows: [
+ *                                  ["張三", "22", "0911123456"],
+                                    ["李四", "33", "0922123456"],
+                                  ]},
+                                { sheetName: "工作列2", 
+ *                                columns: [{ name: "欄位1" }, { name: "欄位2" }, { name: "欄位3" }],
+ *                                rows: [
+ *                                  ["唐三", "22", "0911123456"],
+                                    ["王四", "33", "0922123456"],
+                                  ]}
+                                ]
+ */
+function writeSinglePageExcelJs(fileName, excelJsData) {
+  checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
+
+  const workbook = new exceljs.Workbook()
+  workbook.creator = "Sam" //設定建立者
+  workbook.lastModifiedBy = "58-toolkit" //上次修改人
+  workbook.created = new Date(2022, 11, 21) //建立時間
+  workbook.modified = new Date() //修改時間
+
+  excelJsData.forEach((x) => {
+    const sheet = workbook.addWorksheet(x.sheetName, { properties: { tabColor: { argb: "FFC0000" } } })
+    sheet.addTable({
+      name: sheetName,
+      ref: "A1", // 從A1開始(先預設A1，之後再開放此功能)
+      headerRow: true, // 有沒有要放標頭那一行 也就是columns的那行資料，如果設為false就會那行直接無效
+      columns: x.columns,
+      rows: x.rows,
+    })
+  })
+
+  workbook.xlsx
+    .writeFile(fileName)
+    .then(() => {
+      console.log(`${fileName} 寫入成功!`)
+    })
+    .catch((err) => {
+      console.error("err", err)
+    })
+}
+
+module.exports = { getExcel, writeSinglePageExcel, writeMultiplePagesExcel, writeSinglePageExcelJs }
