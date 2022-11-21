@@ -171,7 +171,7 @@ function writeMultiplePagesExcelJs(fileName, excelJsData) {
   excelJsData.forEach((x) => {
     const sheet = workbook.addWorksheet(x.sheetName, { properties: { tabColor: { argb: "FFC0000" } } })
     sheet.addTable({
-      name: sheetName,
+      name: x.sheetName,
       ref: "A1", // 從A1開始(先預設A1，之後再開放此功能)
       headerRow: true, // 有沒有要放標頭那一行 也就是columns的那行資料，如果設為false就會那行直接無效
       columns: x.columns,
