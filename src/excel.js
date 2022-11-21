@@ -2,6 +2,7 @@ const xlsx = require("node-xlsx") // 引入 node-xlsx 模組
 const fs = require("fs")
 
 const { isNumber } = require("./helpers")
+const { checkPathAndMkdir } = require("./file")
 
 /**
  * 讀取 Excel
@@ -47,6 +48,8 @@ function getExcel(fileName, isLog = false, sheetIndex = 0) {
     const dataArray = [['name', 'age']]
  */
 function writeSinglePageExcel(fileName, sheetName, dataArray, flag = "w") {
+  checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
+
   const buffer = xlsx.build([
     {
       name: sheetName,
@@ -75,6 +78,8 @@ function writeSinglePageExcel(fileName, sheetName, dataArray, flag = "w") {
     const dataArray = [['name', 'age']]
  */
 function writeMultiplePagesExcel(fileName, buff, flag = "w") {
+  checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
+
   const buffer = xlsx.build(buff)
 
   switch (flag) {
