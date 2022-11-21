@@ -169,7 +169,8 @@ function writeMultiplePagesExcelJs(fileName, excelJsData) {
   workbook.modified = new Date() //修改時間
 
   excelJsData.forEach((x) => {
-    const sheet = workbook.addWorksheet(x.sheetName, { properties: { tabColor: { argb: "FFC0000" } } })
+    //const sheet = workbook.addWorksheet(x.sheetName, { properties: { tabColor: { argb: "FFC0000" } } })
+    const sheet = workbook.addWorksheet(x.sheetName)
     sheet.addTable({
       name: x.sheetName,
       ref: "A1", // 從A1開始(先預設A1，之後再開放此功能)
