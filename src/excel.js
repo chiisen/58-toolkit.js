@@ -159,7 +159,7 @@ function writeSinglePageExcelJs(fileName, sheetName, thisColumns, thisRows) {
                                   ]}
                                 ]
  */
-function writeSinglePageExcelJs(fileName, excelJsData) {
+function writeMultiplePagesExcelJs(fileName, excelJsData) {
   checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
 
   const workbook = new exceljs.Workbook()
@@ -189,4 +189,4 @@ function writeSinglePageExcelJs(fileName, excelJsData) {
     })
 }
 
-module.exports = { getExcel, writeSinglePageExcel, writeMultiplePagesExcel, writeSinglePageExcelJs }
+module.exports = { getExcel, writeSinglePageExcel, writeMultiplePagesExcel, writeSinglePageExcelJs, writeMultiplePagesExcelJs }
