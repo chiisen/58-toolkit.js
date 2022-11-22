@@ -9,8 +9,14 @@ const { checkPathAndMkdir } = require("./file")
  * 讀取 Excel
  *
  * @param {string} fileName
+ * @param {boolean} isLog 預設 false 不顯示 log
+ * @param {number 或 string} sheetIndex 指定 sheet(可以是數字0~N或字串'My Sheet')
  */
 function getExcel(fileName, isLog = false, sheetIndex = 0) {
+  if (!fileName) {
+    console.error(`沒有填入EXCEL檔名 fileName: ${fileName}`)
+    return null
+  }
   console.log(`"${fileName}-${sheetIndex}" excel-parse start`)
 
   const excel = []
@@ -49,6 +55,14 @@ function getExcel(fileName, isLog = false, sheetIndex = 0) {
     const dataArray = [['name', 'age']]
  */
 function writeSinglePageExcel(fileName, sheetName, dataArray, flag = "w") {
+  if (!fileName) {
+    console.error(`沒有填入EXCEL檔名 fileName: ${fileName}`)
+    return null
+  }
+  if (!sheetName) {
+    console.error(`沒有填入EXCEL工作列名稱 sheetName: ${sheetName}`)
+    return null
+  }
   checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
 
   const buffer = xlsx.build([
@@ -77,6 +91,10 @@ function writeSinglePageExcel(fileName, sheetName, dataArray, flag = "w") {
  * @param {object} buff
  */
 function writeMultiplePagesExcel(fileName, buff, flag = "w") {
+  if (!fileName) {
+    console.error(`沒有填入EXCEL檔名 fileName: ${fileName}`)
+    return null
+  }
   checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
 
   const buffer = xlsx.build(buff)
@@ -105,6 +123,14 @@ function writeMultiplePagesExcel(fileName, buff, flag = "w") {
     ]
  */
 function writeSinglePageExcelJs(fileName, sheetName, thisColumns, thisRows) {
+  if (!fileName) {
+    console.error(`沒有填入EXCEL檔名 fileName: ${fileName}`)
+    return null
+  }
+  if (!sheetName) {
+    console.error(`沒有填入EXCEL工作列名稱 sheetName: ${sheetName}`)
+    return null
+  }
   checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
 
   const workbook = new exceljs.Workbook()
@@ -160,6 +186,10 @@ function writeSinglePageExcelJs(fileName, sheetName, thisColumns, thisRows) {
                                 ]
  */
 function writeMultiplePagesExcelJs(fileName, excelJsData) {
+  if (!fileName) {
+    console.error(`沒有填入EXCEL檔名 fileName: ${fileName}`)
+    return null
+  }
   checkPathAndMkdir(fileName) // 檢查路徑並建立沒有的目錄
 
   const workbook = new exceljs.Workbook()
@@ -190,4 +220,10 @@ function writeMultiplePagesExcelJs(fileName, excelJsData) {
     })
 }
 
-module.exports = { getExcel, writeSinglePageExcel, writeMultiplePagesExcel, writeSinglePageExcelJs, writeMultiplePagesExcelJs }
+module.exports = {
+  getExcel,
+  writeSinglePageExcel,
+  writeMultiplePagesExcel,
+  writeSinglePageExcelJs,
+  writeMultiplePagesExcelJs,
+}
