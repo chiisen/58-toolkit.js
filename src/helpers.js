@@ -9,6 +9,21 @@ function isNumber(n) {
 }
 
 /**
+ * 檢查是否超過小數點 N 位數
+ * @param {number} n
+ * @param {number} bit 指定小數點幾位數
+ * @return true: 超過， false: 未超過
+ */
+function decimalPlacesLimit(n, bit) {
+  const nLimit_ = n.toFixed(bit)
+  const check_ = n - nLimit_
+  if (check_ > 0) {
+    return true
+  }
+  return false
+}
+
+/**
  * 交換 Map 的 Key 與 Value
  *
  * @param x
@@ -21,4 +36,4 @@ const swapMap = (x) => {
   }, new Map())
 }
 
-module.exports = { isNumber, swapMap }
+module.exports = { isNumber, swapMap, decimalPlacesLimit }
