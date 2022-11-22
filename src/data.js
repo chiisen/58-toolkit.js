@@ -227,17 +227,17 @@ function mergeSortArray(sourceList, targetList){
 }
 
 /**
- * 所有 minBet 1~88 的陣列
+ * 所有 minBet 1~88 的陣列 (12組)
  */
 const minBetList = [1, 3, 5, 9, 10, 15, 20, 25, 30, 40, 50, 88]
 
 /**
- * 所有 betLevel 的陣列
+ * 所有 betLevel 的陣列 (10組)
  */
 const betLevelList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 /**
- * 所有 denom 索引的陣列 1~29
+ * 所有 denom 索引的陣列 1~29 (29組)
  */
 const denomIndexList = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
