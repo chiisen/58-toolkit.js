@@ -53,6 +53,10 @@ function checkPathAndMkdir(fileName) {
  * @param {*} dirPath
  */
 function emptyDir(dirPath) {
+  if (!fs.existsSync(dirPath)) {
+    console.warn(`${dirPath} not found`)
+    return
+  }
   const dirContents = fs.readdirSync(dirPath) // List dir content
 
   for (const fileOrDirPath of dirContents) {
