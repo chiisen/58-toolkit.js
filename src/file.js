@@ -8,13 +8,15 @@ const path = require("path")
  * @param {*} insertText
  */
 function writeAlter(subPath, insertText, fileName) {
-  checkPathAndMkdir(subPath) // 檢查路徑並建立沒有的目錄
-
   let alterName_ = "alter.sql"
   if (fileName) {
     alterName_ = fileName
   }
-  fs.writeFileSync(`${subPath}/${alterName_}`, insertText, "utf8")
+
+  const fullPath_ = `${subPath}/${alterName_}`
+  checkPathAndMkdir(fullPath_) // 檢查路徑並建立沒有的目錄
+
+  fs.writeFileSync(fullPath_, insertText, "utf8")
 }
 
 /**
@@ -24,9 +26,10 @@ function writeAlter(subPath, insertText, fileName) {
  * @param {*} insertText
  */
 function appendAlter(subPath, insertText, fileName) {
-  checkPathAndMkdir(subPath) // 檢查路徑並建立沒有的目錄
+  const fullPath_ = `${subPath}/${fileName}`
+  checkPathAndMkdir(fullPath_) // 檢查路徑並建立沒有的目錄
 
-  fs.appendFileSync(`${subPath}/${fileName}`, insertText, "utf8")
+  fs.appendFileSync(fullPath_, insertText, "utf8")
 }
 
 /**
