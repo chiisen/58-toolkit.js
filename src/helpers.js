@@ -14,7 +14,7 @@ function isNumber(n) {
  * @param {number} bit 指定小數點幾位數
  * @return true: 超過， false: 未超過
  */
-function decimalPlacesLimit(n, bit, isThrow = false) {
+function decimalPlacesLimit(n, bit, isThrow = true) {
   if (!isNumber(n)) {
     const msg_ = `n: ${n} not number`
     console.error(msg_)
