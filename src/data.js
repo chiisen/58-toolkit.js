@@ -206,24 +206,48 @@ function denomIndexListStringToDefaultDenomString(denomListString) {
 /**
  * 比對排序後的兩個陣列是否一致
  */
-function mergeSortArray(sourceList, targetList){
-  let isSame_ = true
-  const sortSourceList_ = sourceList.sort(function (a, b) {
-    return a - b
-  }) //排序: 小到大
+function mergeSortArray(sourceList, targetList, type = "same") {
+  switch (type) {
+    case "same":
+      let isSame_ = true
+      const sortSourceList_ = sourceList.sort(function (a, b) {
+        return a - b
+      }) //排序: 小到大
 
-  const sortTargetList = targetList.sort(function (a, b) {
-    return a - b
-  }) //排序: 小到大
+      const sortTargetList = targetList.sort(function (a, b) {
+        return a - b
+      }) //排序: 小到大
 
-  for (i = 0; i < sortSourceList_.length; i++) {
-    if (isSame_) {
-      if (sortSourceList_[i] != sortTargetList[i]) {
-        isSame_ = false
+      for (i = 0; i < sortSourceList_.length; i++) {
+        if (isSame_) {
+          if (sortSourceList_[i] != sortTargetList[i]) {
+            isSame_ = false
+          }
+        }
       }
+      return isSame_
+    case "include": {
+      let isInclude_ = true
+      const sortSourceList_ = sourceList.sort(function (a, b) {
+        return a - b
+      }) //排序: 小到大
+
+      const sortTargetList = targetList.sort(function (a, b) {
+        return a - b
+      }) //排序: 小到大
+
+      for (i = 0; i < sortSourceList_.length; i++) {
+        if (isInclude_) {
+          for (j = 0; j < sortTargetList.length; j++) {
+            if (sortSourceList_[i] != sortTargetList[j]) {
+              isInclude_ = false
+            }
+          }
+        }
+      }
+      return isInclude_
     }
   }
-  return isSame_
 }
 
 /**
@@ -243,6 +267,51 @@ const denomIndexList = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
 ]
 
+/**
+ * Excel 面額標題陣列
+ */
+const denomTitleLIst = [
+  "1:100000",
+  "1:50000",
+  "1:10000",
+  "1:5000",
+  "1:2000",
+  "1:1000",
+  "1:500",
+  "1:200",
+  "1:100",
+  "1:50",
+  "1:20",
+  "1:10",
+  "1:5",
+  "1:2",
+  "1:1",
+  "2:1",
+  "5:1",
+  "10:1",
+  "20:1",
+  "50:1",
+  "100:1",
+  "200:1",
+  "500:1",
+  "1000:1",
+  "2000:1",
+  "5000:1",
+  "10000:1",
+  "50000:1",
+  "100000:1",
+]
+
+/**
+ * Excel 面額索引標題陣列 1...
+ */
+const denomIndexTitleList = []
+//轉成面額索引
+denomTitleLIst.map((denom) => {
+  const denomIdx = denomToIndexMap.get(denom)
+  denomIndexTitleList.push(denomIdx)
+}, {})
+
 module.exports = {
   denomStringToDenomIndex,
   denomIndexToDenomString,
@@ -254,4 +323,6 @@ module.exports = {
   denomIndexListStringToDenomListString,
   denomIndexListStringToDefaultDenomString,
   mergeSortArray,
+  denomTitleLIst,
+  denomIndexTitleList,
 }
