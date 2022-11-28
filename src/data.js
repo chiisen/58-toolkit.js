@@ -308,8 +308,8 @@ const denomTitleLIst = [
 const denomIndexTitleList = []
 //轉成面額索引
 denomTitleLIst.map((denom) => {
-  const denomIdx = denomToIndexMap.get(denom)
-  denomStringToDenomIndexMap.push(denomIdx)
+  const denomIdx = denomStringToDenomIndexMap.get(denom)
+  denomIndexTitleList.push(denomIdx)
 }, {})
 
 module.exports = {
