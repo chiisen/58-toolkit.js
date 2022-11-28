@@ -236,14 +236,21 @@ function mergeSortArray(sourceList, targetList, type = "same") {
         return a - b
       }) //排序: 小到大
 
-      for (i = 0; i < sortSourceList_.length; i++) {
+      for (i = 0; i < sortTargetList.length; i++) {
         if (isInclude_) {
-          for (j = 0; j < sortTargetList.length; j++) {
-            if (sortSourceList_[i] != sortTargetList[j]) {
-              isInclude_ = false
+          let inSourceList_ = false
+          for (j = 0; j < sortSourceList_.length; j++) {
+            if (!inSourceList_) {
+              if (sortTargetList[i] === sortSourceList_[j]) {
+                inSourceList_ = true
+              }
             }
           }
+          if (!inSourceList_) {
+            isInclude_ = false
+          }
         }
+        
       }
       return isInclude_
     }
