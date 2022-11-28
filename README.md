@@ -16,6 +16,11 @@ npm uninstall --save 58-toolkit
 npm install 58-toolkit
 ```
 
+# 升級 58-toolkit 套件到最新版
+```bash=
+npm install 58-toolkit@latest
+```
+
 # 引用 58-toolkit 套件
 ```javascript=
 const { data, excel, convert } = require("58-toolkit")
@@ -34,8 +39,3 @@ npm login
 npm publish
 ```
 - 記得修改 package.json 的 version
-
-# 升級到最新版
-```bash=
-npm install 58-toolkit@latest
-```
