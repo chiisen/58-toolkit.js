@@ -258,6 +258,31 @@ function mergeSortArray(sourceList, targetList, type = "same") {
 }
 
 /**
+ * 列出陣列超出範圍的數值字串集
+ */
+function overRangeListString(targetList, limitRangeList) {
+  let overRange_ = []
+  targetList.forEach((x) => {
+    let notInclude_ = true
+    limitRangeList.forEach((y) => {
+      if (x === y) {
+        notInclude_ = false
+      }
+    })
+    if (notInclude_) {
+      overRange_.push(x)
+    }
+  })
+
+  let overRangeString_ = ""
+  overRange_.forEach((x) => {
+    overRangeString_ += x.toString() + ","
+  })
+  overRangeString_ = overRangeString_.slice(0, -1) //移除最後一個逗點
+  return overRangeString_
+}
+
+/**
  * 所有 minBet 1~88 的陣列 (12組)
  */
 const minBetList = [1, 3, 5, 9, 10, 15, 20, 25, 30, 40, 50, 88]
@@ -332,4 +357,5 @@ module.exports = {
   mergeSortArray,
   denomTitleLIst,
   denomIndexTitleList,
+  overRangeListString,
 }
