@@ -44,4 +44,27 @@ const swapMap = (x) => {
   }, new Map())
 }
 
-module.exports = { isNumber, swapMap, decimalPlacesLimit }
+/**
+ * 相加兩個 denom 陣列
+ * @param denomArrayA
+ * @param denomArrayB
+ */
+function addTwoDenomList(denomArrayA, denomArrayB) {
+  const twdDenomMap = new Map()
+  let count_ = 0
+  denomArrayA.forEach((x) => {
+    twdDenomMap.set(count_, x)
+    count_++
+  })
+  denomArrayB.forEach((x) => {
+    twdDenomMap.set(count_, x)
+    count_++
+  })
+  const denomArray_ = []
+  twdDenomMap.forEach((x) => {
+    denomArray_.push(x)
+  })
+  return denomArray_
+}
+
+module.exports = { isNumber, swapMap, decimalPlacesLimit, addTwoDenomList }
