@@ -138,16 +138,16 @@ const ratioToDenomArrayMap = swapMap(denomToRatioMap)
 /**
  * 面額【比率】轉成面額【字串】
  *
- * @param {*} denom
+ * @param {*} ratio
  *
  */
-function denomRatioToDenomString(denom) {
-  if (isNumber(denom)) {
+function denomRatioToDenomString(ratio) {
+  if (isNumber(ratio)) {
     //@note 使用 swapMap 轉換後，都會變成陣列，目前還沒辦法調整為字串，之後會再調整
-    const denomString_ = ratioToDenomArrayMap.get(denom)
+    const denomString_ = ratioToDenomArrayMap.get(ratio)
     return denomString_[0]
   }
-  const msg_ = `denom: '${denom}' not number`
+  const msg_ = `ratio: '${ratio}' not number`
   console.error(msg_)
   throw msg_
 }
@@ -358,4 +358,5 @@ module.exports = {
   denomTitleLIst,
   denomIndexTitleList,
   overRangeListString,
+  ratioToDenomArrayMap,
 }
