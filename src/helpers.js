@@ -77,14 +77,14 @@ function addTwoDenomList(denomArrayA, denomArrayB) {
  * @param denomArrayB
  * @returns
  */
-function mergeSortArrayByColor(denomArrayA, denomArrayB) {
+function mergeSortArrayByColor(denomArrayA, denomArrayB, includeColor, notIncludeColor) {
   const twdDenomMap_ = new Map()
 
   denomArrayA.forEach((x) => {
     const key_ = `${x}`
     const value_ = twdDenomMap_.get(key_)
     if (!value_) {
-      twdDenomMap_.set(key_, clc.green(key_))
+      twdDenomMap_.set(key_, includeColor(key_))
     } else {
       console.error(`key_: ${key_} 重複了`)
     }
@@ -94,9 +94,9 @@ function mergeSortArrayByColor(denomArrayA, denomArrayB) {
     const key_ = `${x}`
     const value_ = twdDenomMap_.get(key_)
     if (!value_) {
-      twdDenomMap_.set(key_, clc.red(key_))
+      twdDenomMap_.set(key_, notIncludeColor(key_))
     } else {
-      twdDenomMap_.set(key_, clc.green(key_))
+      twdDenomMap_.set(key_, includeColor(key_))
     }
   })
 

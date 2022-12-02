@@ -1,6 +1,6 @@
 {
   "name": "58-toolkit",
-  "version": "1.0.42",
+  "version": "1.0.43",
   "description": "常用工具箱",
   "main": "src/index.js",
   "scripts": {
@@ -13,7 +13,6 @@
   "author": "Sam",
   "license": "MIT",
   "dependencies": {
-    "cli-color": "^2.0.3",
     "dotenv": "^16.0.3",
     "exceljs": "^4.3.0",
     "node-xlsx": "^0.21.0"
