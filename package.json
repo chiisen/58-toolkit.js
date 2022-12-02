@@ -1,6 +1,6 @@
 {
   "name": "58-toolkit",
-  "version": "1.0.40",
+  "version": "1.0.42",
   "description": "常用工具箱",
   "main": "src/index.js",
   "scripts": {

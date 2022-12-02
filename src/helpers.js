@@ -51,20 +51,67 @@ const swapMap = (x) => {
  */
 function addTwoDenomList(denomArrayA, denomArrayB) {
   const twdDenomMap_ = new Map()
+
   denomArrayA.forEach((x) => {
     twdDenomMap_.set(x, x)
   })
+
   denomArrayB.forEach((x) => {
     const value_ = twdDenomMap_.get(x)
     if (!value_) {
       twdDenomMap_.set(x, x)
     }
   })
-  const denomArray_ = []
-  twdDenomMap_.forEach((x) => {
-    denomArray_.push(x)
-  })
-  return denomArray_
+
+  // ✅ Sort Descending (high to low)
+  const sortedNumDesc = new Map([...twdDenomMap_].sort((a, b) => b[0] - a[0]))
+
+  return Array.from(sortedNumDesc.values())
 }
 
-module.exports = { isNumber, swapMap, decimalPlacesLimit, addTwoDenomList }
+/**
+ * 用顏色區分兩個陣列中那個有差異
+ * 列出那些 denomArrayB 不在 denomArrayA 中的元素
+ *
+ * @param denomArrayA
+ * @param denomArrayB
+ * @returns
+ */
+function mergeSortArrayByColor(denomArrayA, denomArrayB) {
+  const twdDenomMap_ = new Map()
+
+  denomArrayA.forEach((x) => {
+    const key_ = `${x}`
+    const value_ = twdDenomMap_.get(key_)
+    if (!value_) {
+      twdDenomMap_.set(key_, clc.green(key_))
+    } else {
+      console.error(`key_: ${key_} 重複了`)
+    }
+  })
+
+  denomArrayB.forEach((x) => {
+    const key_ = `${x}`
+    const value_ = twdDenomMap_.get(key_)
+    if (!value_) {
+      twdDenomMap_.set(key_, clc.red(key_))
+    } else {
+      twdDenomMap_.set(key_, clc.green(key_))
+    }
+  })
+
+  let denomListString_ = ""
+  // ✅ Sort Ascending (low to high)
+  const sortNumAsc = new Map([...twdDenomMap_].sort((a, b) => a[0] - b[0]))
+  // ✅ Sort Descending (high to low)
+  const sortedNumDesc = new Map([...twdDenomMap_].sort((a, b) => b[0] - a[0]))
+
+  sortedNumDesc.forEach((x) => {
+    denomListString_ += x.toString() + ","
+  })
+
+  denomListString_ = denomListString_.slice(0, -1) //移除最後一個逗點
+  return denomListString_
+}
+
+module.exports = { isNumber, swapMap, decimalPlacesLimit, addTwoDenomList, mergeSortArrayByColor }
