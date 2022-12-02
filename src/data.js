@@ -359,4 +359,7 @@ module.exports = {
   denomIndexTitleList,
   overRangeListString,
   ratioToDenomArrayMap,
+  denomStringToDenomIndexMap,
+  denomIndexToDenomStringArrayMap,
+  denomToRatioMap,
 }
