@@ -50,18 +50,18 @@ const swapMap = (x) => {
  * @param denomArrayB
  */
 function addTwoDenomList(denomArrayA, denomArrayB) {
-  const twdDenomMap = new Map()
-  let count_ = 0
+  const twdDenomMap_ = new Map()
   denomArrayA.forEach((x) => {
-    twdDenomMap.set(count_, x)
-    count_++
+    twdDenomMap_.set(x, x)
   })
   denomArrayB.forEach((x) => {
-    twdDenomMap.set(count_, x)
-    count_++
+    const value_ = twdDenomMap_.get(x)
+    if (!value_) {
+      twdDenomMap_.set(x, x)
+    }
   })
   const denomArray_ = []
-  twdDenomMap.forEach((x) => {
+  twdDenomMap_.forEach((x) => {
     denomArray_.push(x)
   })
   return denomArray_
