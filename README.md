@@ -1,5 +1,5 @@
 # 🧰 58-toolkit
-常用用工具箱 🛠️
+常用工具箱 🛠️
 
 # 📂 其他專案如果要安裝本地的 58-toolkit 套件
 ```bash=
@@ -39,3 +39,9 @@ npm login
 npm publish
 ```
 - 📝 記得修改 package.json 的 version
+
+# 🧪 測試
+```bash=
+npm test           # 執行測試並生成涵蓋率報告
+npm run test:watch # 監聽模式
+```
