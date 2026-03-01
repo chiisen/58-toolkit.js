@@ -1,4 +1,4 @@
-const { isNumber, swapMap, decimalPlacesLimit, addTwoDenomList, mergeSortArrayByColor } = require("./src/helpers")
+const { isNumber, swapMap, decimalPlacesLimit, addTwoDenomList, mergeSortArrayByColor } = require("../src/helpers")
 
 describe("helpers.js", () => {
   describe("isNumber", () => {

@@ -1,6 +1,6 @@
 const fs = require("fs")
 const path = require("path")
-const { writeAlter, appendAlter, checkPathAndMkdir, emptyDir } = require("./src/file")
+const { writeAlter, appendAlter, checkPathAndMkdir, emptyDir } = require("../src/file")
 
 describe("file.js", () => {
   const testDir = path.join(__dirname, "test_temp")

@@ -10,7 +10,7 @@ const {
   minBetList,
   betLevelList,
   denomIndexList,
-} = require("./src/data")
+} = require("../src/data")
 
 describe("data.js", () => {
   describe("denomStringToDenomIndex", () => {

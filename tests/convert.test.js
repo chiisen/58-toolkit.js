@@ -6,7 +6,7 @@ const {
   convertListToDenomString,
   convertListToDenomConvertString,
   convertExcelToDenomConvertString,
-} = require("./src/convert")
+} = require("../src/convert")
 
 describe("convert.js", () => {
   describe("convertExcelToDenomList", () => {

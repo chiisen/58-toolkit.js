@@ -7,7 +7,7 @@ jest.mock("exceljs")
 const fs = require("fs")
 const xlsx = require("node-xlsx")
 const exceljs = require("exceljs")
-const { getExcel, writeSinglePageExcel, writeMultiplePagesExcel } = require("./src/excel")
+const { getExcel, writeSinglePageExcel, writeMultiplePagesExcel } = require("../src/excel")
 
 describe("excel.js", () => {
   const testDir = path.join(__dirname, "test_excel_temp")
